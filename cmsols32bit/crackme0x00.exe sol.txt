@@ -1,0 +1,38 @@
+crackme0x00.exe sol
+
+[listing]
+run to address of entry
+
+search for string references in current region
+
+[references]
+set breakpoints at notable addresses
+--> 00401368 and 00401348A
+
+[listing]
+optional: enter ebp register to see scanf method using shift+*
+
+[terminal]
+enter any password and press enter
+
+[listing]
+notice: *
+'mov' is the assembly instruction used to move data between registers and memory locations. In this case, it is used to move a value into memory.
+
+'dword ptr' is an instruction prefix that specifies the size of the operand being moved. 'dword ptr' indicates that a double-word (4 bytes) should be moved.
+
+'ss' refers to the segment register used for the stack segment.
+
+[esp+4] is the memory address being accessed. The value in the esp register (the stack pointer) is incremented by 4 before accessing the memory location.
+
+crackme0x00.40 | [esp+4]:"1234", 404027:"250382" is the value being moved into memory.
+
+at 0040137A je mnemonic will jump to invalid password instruction if the call to <JUMP.&strcmp> does not return 0 because that function returns 0 if the two strings are equal. in the case where we entered the wrong password notice how the eax register returns null. due to this we must change the value of this register to 0 in order to bypass the the password requirement.
+
+aside from this it's possible to deduce that the password is 250382 from the comparison in the user input and that value
+*
+
+[Fpu registers]
+right before 00401373 change the eax register to equal 0 then the computer should jump the correct password call
+
+

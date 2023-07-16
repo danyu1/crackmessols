@@ -1,0 +1,40 @@
+crackme0x001 sol
+[listing]
+check for string references in current region
+
+[references]
+break point notable addresses with strings
+--> 0040133A, 00401346, 00401359
+
+[listing]
+run up until scanf call *might need to set a breakpoint at the instruction*
+
+before you enter a password set a break point at 00401365 to analyze the cmp call
+
+enter a password
+
+notice: *
+cmp: This is the mnemonic for the "compare" instruction, which is used to compare two values.
+dword ptr: This specifies the size of the operands being compared. In this case, it indicates that a double word (32 bits) is being compared.
+
+ss:[ebp-4]: This is the memory operand. It refers to the value stored at the address [ebp-4] relative to the stack segment (ss). The ebp register
+ typically points to the base of the current stack frame, and in this case, we are accessing the value stored at an offset of 4 bytes below ebp.
+
+149A: This is the immediate value, the constant being compared against the value at [ebp-4]. In this case, 149A represents a hexadecimal value.
+
+due to this it's possible to deduce that either the register at [ebp-4] or 149A the next step will require you to analyze and follow each register to their respectice caches
+*
+
+follow [ebp-4] to the dump to find its address and its binary value
+
+convert the hex value into deci and you should find the password that you entered
+
+notice: *
+due to this you now know that the edp-4 register holds your password and that the real password is 149A 
+*
+
+convert 149A into dec and find that the password is 5274
+
+
+
+
